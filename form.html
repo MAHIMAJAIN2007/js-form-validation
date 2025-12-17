@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Validation Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { width: 300px; margin: 40px auto; }
+        label { display: block; margin-top: 10px; }
+        input { width: 100%; padding: 6px; }
+        span { color: red; font-size: 12px; }
+        button { margin-top: 15px; padding: 8px; width: 100%; }
+    </style>
+</head>
+<body><form onsubmit="return validateForm()">
+    <h2>Registration Form</h2><label>Name:</label>
+<input type="text" id="name">
+<span id="nameError"></span>
+
+<label>Email:</label>
+<input type="text" id="email">
+<span id="emailError"></span>
+
+<label>Password:</label>
+<input type="password" id="password">
+<span id="passwordError"></span>
+
+<label>Mobile Number:</label>
+<input type="text" id="mobile">
+<span id="mobileError"></span>
+
+<button type="submit">Submit</button>
+
+</form><script>
+function validateForm() {
+    let isValid = true;
+
+    // Get values
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let mobile = document.getElementById("mobile").value;
+
+    // Clear previous errors
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("passwordError").innerHTML = "";
+    document.getElementById("mobileError").innerHTML = "";
+
+    // Name validation
+    if (name === "") {
+        document.getElementById("nameError").innerHTML = "Name is required";
+        isValid = false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (email === "") {
+        document.getElementById("emailError").innerHTML = "Email is required";
+        isValid = false;
+    } else if (!email.match(emailPattern)) {
+        document.getElementById("emailError").innerHTML = "Invalid email format";
+        isValid = false;
+    }
+
+    // Password validation
+    if (password === "") {
+        document.getElementById("passwordError").innerHTML = "Password is required";
+        isValid = false;
+    } else if (password.length < 6) {
+        document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters";
+        isValid = false;
+    }
+
+    // Mobile validation
+    if (mobile === "") {
+        document.getElementById("mobileError").innerHTML = "Mobile number is required";
+        isValid = false;
+    } else if (isNaN(mobile) || mobile.length !== 10) {
+        document.getElementById("mobileError").innerHTML = "Enter valid 10-digit mobile number";
+        isValid = false;
+    }
+
+    return isValid;
+}
+</script></body>
+</html>
+</body>
+</html>
